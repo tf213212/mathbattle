@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- 设置背景 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backmain" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="757dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/training" />
+            <!-- 标题区域 -->
+            <TextView
+                android:id="@+id/practice_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="练习题"
+                android:textColor="#333333"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- 进度区域 -->
+            <TextView
+                android:id="@+id/progress_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="进度 0/0"
+                android:textColor="#666666"
+                android:textSize="24sp" />
+
+            <!-- 问题区域 -->
+            <TextView
+                android:id="@+id/question_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="题目"
+                android:textColor="#333333"
+                android:textSize="24sp" />
+
+            <!-- 输入区域 -->
+            <EditText
+                android:id="@+id/answer_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="请输入答案"
+                android:inputType="numberDecimal|numberSigned"
+                android:padding="12dp"
+                android:textSize="18sp" />
+
+            <!-- 提交按钮 -->
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#4CAF50"
+                android:padding="12dp"
+                android:text="提交"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <!-- 结果反馈区域 -->
+            <TextView
+                android:id="@+id/result_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="结果反馈"
+                android:textColor="#333333"
+                android:textSize="18sp" />
+
+            <!-- 返回按钮 -->
+            <Button
+                android:id="@+id/return_to_main_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#2196F3"
+                android:padding="12dp"
+                android:text="返回主界面"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>

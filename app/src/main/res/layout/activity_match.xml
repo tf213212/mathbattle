@@ -1,32 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="@drawable/backmain"
     android:padding="24dp">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="口算对战在线匹配"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+    <ImageView
+        android:id="@+id/match_decor_image"
+        android:layout_width="373dp"
+        android:layout_height="373dp"
+        android:layout_above="@id/start_match_button"
+        android:layout_marginBottom="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/battle_match" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#40FFFFFF"/>
     <TextView
         android:id="@+id/match_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="410dp"
         android:text="请点击开始匹配"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:layout_marginBottom="20dp"
-        tools:visibility="visible" />
+        android:textColor="#FF0000"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="#2196F3"
         android:visibility="gone" />
 
     <Button
         android:id="@+id/start_match_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开始匹配" />
-</LinearLayout>
+        android:layout_width="240dp"
+        android:layout_height="56dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:text="开始匹配"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

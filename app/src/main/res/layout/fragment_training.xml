@@ -1,36 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@drawable/backmain"
+    android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="训练营"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp"
+        android:paddingBottom="72dp">
 
-    <Button
-        android:id="@+id/training_exercise_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="开始练习"
-        android:layout_marginBottom="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-    <Button
-        android:id="@+id/training_history_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="练习历史"
-        android:layout_marginBottom="10dp"/>
+            <!-- 标题部分 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="32dp">
 
-    <Button
-        android:id="@+id/training_statistics_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="练习统计"/>
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/training_icon"
+                    app:tint="?attr/colorPrimary"/>
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="训练营地"
+                    android:textSize="28sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    android:layout_marginStart="16dp"
+                    android:letterSpacing="0.02"/>
+            </LinearLayout>
+
+            <!-- 训练模式卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/training_card"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginBottom="24dp"
+                app:shapeAppearanceOverlay="@style/RoundedCornerLarge"
+                app:strokeWidth="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- 背景图层 -->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.80"
+                        android:src="@drawable/bg_math_pattern"/>
+
+                    <!-- 内容层 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="专项训练"
+                            android:textSize="24sp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold"
+                            android:layout_marginTop="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="夯实数学基础能力"
+                            android:textSize="16sp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="8dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/training_exercise_button"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="200dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="24dp"
+                            android:text="开始训练"
+                            app:icon="@drawable/ic_training_start"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorPrimary"
+                            app:strokeColor="?attr/colorPrimary"
+                            app:strokeWidth="1dp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 历史记录卡片 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/history_card"
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                app:shapeAppearanceOverlay="@style/RoundedCornerLarge"
+                app:strokeWidth="1dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- 背景图层 -->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.80"
+                        android:src="@drawable/bg_math_pattern"/>
+
+                    <!-- 内容层 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="练习记录"
+                            android:textSize="24sp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold"
+                            android:layout_marginTop="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看历史训练记录"
+                            android:textSize="16sp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="8dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/training_history_button"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="200dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="24dp"
+                            android:text="查看历史"
+                            app:icon="@drawable/ic_history"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorPrimary"
+                            app:strokeColor="?attr/colorPrimary"
+                            app:strokeWidth="1dp"
+                            app:shapeAppearanceOverlay="@style/RoundedButtonStyle"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

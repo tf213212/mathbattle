@@ -1,5 +1,6 @@
 package com.example.mentalmathbattle.ui
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginButton: Button
     private lateinit var loginErrorText: TextView
     private lateinit var registerButton: Button
+    private lateinit var forgotPasswordButton: Button
+
     private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +37,8 @@ class LoginActivity : AppCompatActivity() {
         loginButton = findViewById(R.id.login_button)
         loginErrorText = findViewById(R.id.login_error_text)
         registerButton = findViewById(R.id.register_button)
+        forgotPasswordButton = findViewById(R.id.forgot_password_button)
+
 
         registerButton.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
@@ -45,6 +50,10 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordInput.text.toString()
             login(username, password)
         }
+        forgotPasswordButton.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun login(username: String, password: String) {
@@ -54,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val requestBody = json.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
-        val serverUrl = "http://10.0.2.2:8080/api/login"
+        val serverUrl = "https://72bc-113-57-44-160.ngrok-free.app/api/login"
 
         val request = Request.Builder()
             .url(serverUrl)
@@ -76,13 +85,31 @@ class LoginActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val jsonResponse = JSONObject(responseBody ?: "")
                         val userId = jsonResponse.optInt("userId", -1)
+
                         if (userId != -1) {
+                            val username = jsonResponse.optString("username", "未登录")
+                            val email = jsonResponse.optString("email", "未绑定")
+                            val avatarUrl = jsonResponse.optString("avatarUrl", null)
+                            var score=jsonResponse.optInt("score", 0)
+
+                            val sharedPref = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                            with(sharedPref.edit()) {
+                                putBoolean("is_logged_in", true)
+                                putInt("userId", userId)
+                                putInt("score", score)
+                                putString("username", username)
+                                putString("email", email)
+                                putString("avatarUrl", avatarUrl)
+                                apply()
+                            }
+
                             Toast.makeText(this@LoginActivity, "登录成功！", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             intent.putExtra("userId", userId)
                             startActivity(intent)
                             finish()
-                        } else {
+                        }
+                        else {
                             loginErrorText.text = "登录失败，请检查用户名和密码"
                             loginErrorText.visibility = TextView.VISIBLE
                             Toast.makeText(this@LoginActivity, "登录失败，请检查用户名和密码", Toast.LENGTH_SHORT).show()

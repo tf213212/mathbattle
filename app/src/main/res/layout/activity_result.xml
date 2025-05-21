@@ -1,134 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp"
-    android:background="@android:color/white">
+    android:background="@drawable/backmain"
+    android:padding="24dp">
 
     <!-- 结果标题 -->
     <TextView
         android:id="@+id/result_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:text="比赛结果"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="30dp"/>
-
-    <!-- 结果图标 -->
-    <ImageView
-        android:id="@+id/result_icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="30dp"/>
-
-    <!-- 得分显示 -->
-    <TextView
-        android:id="@+id/score_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="得分: 0"
-        android:textSize="28sp"
-        android:textColor="@android:color/holo_green_dark"
-        android:layout_marginBottom="20dp"/>
-
-    <!-- 正确率显示 -->
-    <TextView
-        android:id="@+id/accuracy_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="答题正确率: 0%"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="20dp"/>
-
-    <!-- 用时显示 -->
-    <TextView
-        android:id="@+id/time_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="用时: 0秒"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="40dp"/>
-
-    <!-- 统计信息卡片 -->
-    <androidx.cardview.widget.CardView
+        android:textColor="#FF0000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="8dp">
+        android:layout_below="@id/result_text"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+        <!-- 结果图标 -->
+        <ImageView
+            android:id="@+id/result_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- 得分显示 -->
+                <TextView
+                    android:id="@+id/score_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="得分: 0"
+                    android:textAlignment="center"
+                    android:textColor="#4CAF50"
+                    android:textSize="28sp" />
+
+                    <!-- 正确率显示 -->
+                    <TextView
+                        android:id="@+id/accuracy_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="答题正确率: 0%"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+
+                    <!-- 用时显示 -->
+                    <TextView
+                        android:id="@+id/time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="用时: 0秒"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        android:textSize="18sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!-- 统计信息卡片 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="详细统计"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/correct_count_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="正确题数: 0"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/total_questions_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="总题数: 0"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 按钮容器 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingHorizontal="20dp">
 
-            <TextView
+            <!-- 返回主界面按钮 -->
+            <Button
+                android:id="@+id/back_to_main_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="详细统计"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="15dp"/>
+                android:layout_height="48dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_login_bg"
+                android:text="返回主界面"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/correct_count_text"
+            <!-- 重新开始匹配按钮 -->
+            <Button
+                android:id="@+id/rematch_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="正确题数: 0"
+                android:layout_height="48dp"
+                android:text="重新开始匹配"
+                android:textAllCaps="false"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"/>
-
-            <TextView
-                android:id="@+id/total_questions_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="总题数: 0"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:layout_marginTop="10dp"/>
-
+                android:backgroundTint="@android:color/holo_green_light" />
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <!-- 按钮容器 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- 返回主界面按钮 -->
-        <Button
-            android:id="@+id/back_to_main_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="返回主界面"
-            android:textSize="18sp"
-            android:layout_marginBottom="15dp"
-            android:backgroundTint="@android:color/holo_blue_light"
-            android:padding="15dp"
-            android:layout_marginHorizontal="20dp"/>
-
-        <!-- 重新开始匹配按钮 -->
-        <Button
-            android:id="@+id/rematch_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="重新开始匹配"
-            android:textSize="18sp"
-            android:backgroundTint="@android:color/holo_green_light"
-            android:padding="15dp"
-            android:layout_marginHorizontal="20dp"/>
-
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

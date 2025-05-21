@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="@android:color/white">
+    android:background="@drawable/backmain">
 
     <!-- 标题区域 -->
     <TextView
@@ -159,8 +159,9 @@
             android:id="@+id/answer_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:hint="请输入答案"
-            android:inputType="number"
+            android:inputType="numberDecimal|numberSigned"
             android:textSize="18sp"
             android:padding="15dp"
             android:background="@drawable/rounded_corner_background_edittext"/>
@@ -170,9 +171,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="提交答案"
+            android:background="@drawable/button_submit_bg"
             android:textSize="18sp"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="@android:color/holo_green_light"/>
+            android:layout_marginTop="15dp" />
 
     </LinearLayout>
 

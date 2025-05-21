@@ -8,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.mentalmathbattle.R
-import com.example.mentalmathbattle.ui.TrainingExerciseActivity
-import com.example.mentalmathbattle.ui.TrainingHistoryActivity
 import com.example.mentalmathbattle.ui.TrainingStatisticsActivity
+import com.example.mentalmathbattle.ui.TrainingActivity
+import com.example.mentalmathbattle.ui.TrainingHistoryActivity
+
 
 class TrainingFragment : Fragment() {
 
@@ -26,7 +27,7 @@ class TrainingFragment : Fragment() {
 
         // 开始练习按钮点击事件
         view.findViewById<Button>(R.id.training_exercise_button).setOnClickListener {
-            val intent = Intent(requireContext(), TrainingExerciseActivity::class.java)
+            val intent = Intent(requireContext(), TrainingActivity::class.java)
             intent.putExtra("userId", arguments?.getInt("userId", -1))
             startActivity(intent)
         }
@@ -34,13 +35,6 @@ class TrainingFragment : Fragment() {
         // 练习历史按钮点击事件
         view.findViewById<Button>(R.id.training_history_button).setOnClickListener {
             val intent = Intent(requireContext(), TrainingHistoryActivity::class.java)
-            intent.putExtra("userId", arguments?.getInt("userId", -1))
-            startActivity(intent)
-        }
-
-        // 练习统计按钮点击事件
-        view.findViewById<Button>(R.id.training_statistics_button).setOnClickListener {
-            val intent = Intent(requireContext(), TrainingStatisticsActivity::class.java)
             intent.putExtra("userId", arguments?.getInt("userId", -1))
             startActivity(intent)
         }

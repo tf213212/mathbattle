@@ -1,48 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="@drawable/login_bg"
     android:padding="16dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="欢迎来到口算星球"
+        android:textColor="#FF0000"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
     <!-- 用户名输入框 -->
     <EditText
         android:id="@+id/username_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginBottom="20dp"
-        android:hint="用户名"
+        android:background="@drawable/edittext_bg"
+        android:hint="输入账号"
         android:inputType="text"
         android:padding="10dp"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <!-- 密码输入框 -->
     <EditText
         android:id="@+id/password_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginBottom="30dp"
-        android:hint="密码"
+        android:background="@drawable/edittext_bg"
+        android:hint="输入密码"
         android:inputType="textPassword"
         android:padding="10dp"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <!-- 登录按钮 -->
-    <Button
+    <android.widget.Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:background="@drawable/button_login_bg"
         android:text="登录"
-        android:textSize="18sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/register_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_register_bg"
         android:text="注册"
-        android:layout_marginTop="8dp" />
+        android:textSize="16sp"  />
 
+    <android.widget.Button
+        android:id="@+id/forgot_password_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_login_bg"
+        android:text="找回密码"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp" />
 
     <!-- 提示文本 -->
     <TextView
@@ -54,5 +82,5 @@
         android:textColor="@android:color/holo_red_dark"
         android:textSize="14sp"
         android:visibility="gone" />
-
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

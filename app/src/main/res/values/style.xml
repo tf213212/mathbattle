@@ -31,4 +31,13 @@
         <item name="strokeWidth">1dp</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Material3.MediumComponent</item>
     </style>
+    <style name="RoundedCornerLarge" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">32dp</item>
+    </style>
+
+    <style name="RoundedButtonStyle" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
 </resources>

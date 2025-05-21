@@ -3,89 +3,108 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/surface">
+    android:background="@drawable/backmain"
+    android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
-    <!-- 可滚动内容区域 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:padding="16dp"
-        android:paddingBottom="72dp"> <!-- 预留导航栏空间 -->
+        android:paddingBottom="72dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
-            <!-- 顶部标题 -->
-            <TextView
+            <!-- 标题部分 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="心算对战"
-                android:textSize="28sp"
-                android:textColor="@color/on_surface"
-                android:textStyle="bold"
-                android:letterSpacing="0.02"
-                android:layout_marginBottom="32dp"
-                android:drawablePadding="8dp"
-                app:drawableStartCompat="@drawable/ic_math"
-                app:drawableTint="@color/primary"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="32dp">
 
-            <!-- 匹配对战卡片 -->
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/battle"
+                    app:tint="?attr/colorPrimary"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="心算竞技场"
+                    android:textSize="28sp"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textStyle="bold"
+                    android:layout_marginStart="16dp"
+                    android:letterSpacing="0.02"/>
+            </LinearLayout>
+
+            <!-- 对战卡片 -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/match_card"
                 style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/surface_container">
+                android:layout_height="280dp"
+                android:layout_marginBottom="24dp"
+                app:shapeAppearanceOverlay="@style/RoundedCornerLarge"
+                app:strokeWidth="1dp">
 
-                <!-- 卡片内容保持不变 -->
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
+                    android:layout_height="match_parent">
 
+                    <!-- 背景图层 -->
                     <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_battle"
-                        app:tint="@color/primary"/>
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="匹配对战"
-                        android:textAlignment="center"
-                        android:textColor="@color/on_surface"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:layout_height="350dp"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.80"
+                        android:src="@drawable/bg_math_pattern"/>
 
-                    <TextView
+                    <!-- 内容层 -->
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="与全球玩家实时对战"
-                        android:textAlignment="center"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="14sp"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        android:gravity="center">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/match_battle_button"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="16dp"
-                        android:text="开始匹配"
-                        app:icon="@drawable/ic_play"
-                        app:iconTint="@color/primary"
-                        app:strokeColor="@color/primary"
-                        app:strokeWidth="1dp"/>
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="实时对战"
+                            android:textSize="24sp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold"
+                            android:layout_marginTop="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="挑战数学高手"
+                            android:textSize="16sp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="8dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/match_battle_button"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="200dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="24dp"
+                            android:text="开始匹配"
+                            app:icon="@drawable/ic_flash"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorPrimary"
+                            app:strokeColor="?attr/colorPrimary"
+                            app:strokeWidth="1dp" />
+                    </LinearLayout>
+                </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- 错题本卡片 -->
@@ -93,56 +112,63 @@
                 android:id="@+id/error_card"
                 style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="@color/surface_container"
-                app:cardElevation="4dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent">
+                android:layout_height="280dp"
+                android:layout_marginBottom="24dp"
+                app:shapeAppearanceOverlay="@style/RoundedCornerLarge"
+                app:strokeWidth="1dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
+                    android:layout_height="match_parent">
 
+                    <!-- 背景图层 -->
                     <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_mistakes"
-                        app:tint="@color/secondary"/>
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="错题本"
-                        android:textAlignment="center"
-                        android:textColor="@color/on_surface"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.80"
+                        android:src="@drawable/bg_math_pattern"/>
 
-                    <TextView
+                    <!-- 内容层 -->
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="查看并练习你的错题"
-                        android:textAlignment="center"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="14sp"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        android:gravity="center">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/error_book_button"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="16dp"
-                        android:text="查看错题"
-                        app:icon="@drawable/ic_book"
-                        app:iconTint="@color/secondary"
-                        app:strokeColor="@color/secondary"
-                        app:strokeWidth="1dp"/>
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="错题回顾"
+                            android:textSize="24sp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold"
+                            android:layout_marginTop="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="温故知新提升准确率"
+                            android:textSize="16sp"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:layout_marginTop="8dp"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/error_book_button"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="200dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="24dp"
+                            android:text="查看错题"
+                            app:icon="@drawable/ic_book_open"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorPrimary"
+                            app:strokeColor="?attr/colorPrimary"
+                            app:strokeWidth="1dp"
+                            app:shapeAppearanceOverlay="@style/RoundedButtonStyle"/>
+                    </LinearLayout>
+                </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- 排行榜卡片 -->
@@ -150,55 +176,69 @@
                 android:id="@+id/leaderboard_card"
                 style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/surface_container"
+                android:layout_height="280dp"
                 app:cardElevation="4dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent">
+                app:shapeAppearanceOverlay="@style/RoundedCornerLarge"
+                app:strokeWidth="1dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
+                    android:layout_height="match_parent">
 
                     <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_leaderboard"
-                        app:tint="@color/tertiary"/>
-
-                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="排行榜"
-                        android:textAlignment="center"
-                        android:textColor="@color/on_surface"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:layout_height="350dp"
+                        android:scaleType="centerCrop"
+                        android:alpha="0.80"
+                        android:src="@drawable/bg_math_pattern"/>
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="查看全球玩家排名"
-                        android:textAlignment="center"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="14sp"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        android:gravity="center">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/leaderboard_button"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="16dp"
-                        android:text="查看排名"
-                        app:icon="@drawable/ic_trophy"
-                        app:iconTint="@color/tertiary"
-                        app:strokeColor="@color/tertiary"
-                        app:strokeWidth="1dp"/>
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="16dp"
+                            android:src="@drawable/ic_leaderboard"
+                            app:tint="?attr/colorPrimary"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="排行榜"
+                            android:textAlignment="center"
+                            android:textSize="24sp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="查看全球玩家排名"
+                            android:textAlignment="center"
+                            android:textSize="16sp"
+                            android:textColor="?attr/colorOnSurfaceVariant"/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/leaderboard_button"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="200dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="24dp"
+                            android:text="查看排名"
+                            app:icon="@drawable/ic_trophy"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorPrimary"
+                            app:strokeColor="?attr/colorPrimary"
+                            app:strokeWidth="1dp"/>
+                    </LinearLayout>
+                </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>

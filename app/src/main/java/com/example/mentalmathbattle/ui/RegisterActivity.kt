@@ -22,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var registerErrorText: TextView
 
     private val client = OkHttpClient()
-    private val serverUrl = "http://10.0.2.2:8080/api/register"
+    private val serverUrl = "https://72bc-113-57-44-160.ngrok-free.app/api/register"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

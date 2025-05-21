@@ -11,17 +11,17 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // 模拟检查登录状态
-        // 实际项目中，这里应该从 SharedPreferences 或其他存储中读取登录状态
-        val isLoggedIn = false // 假设用户未登录
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val isLoggedIn = prefs.getBoolean("is_logged_in", false)
 
         if (isLoggedIn) {
-            // 如果已登录，跳转到主活动
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userId", prefs.getInt("user_id", -1))
+            startActivity(intent)
         } else {
-            // 如果未登录，跳转到登录活动
             startActivity(Intent(this, LoginActivity::class.java))
         }
         finish()
     }
+
 }

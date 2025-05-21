@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backmain"
+    android:padding="16dp">
+
+    <!-- 用户信息 -->
+    <TextView
+        android:id="@+id/user_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用户名："
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- 错题本标题 -->
+    <TextView
+        android:id="@+id/wrong_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📘 错题本"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:paddingTop="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 错题列表 -->
+    <ListView
+        android:id="@+id/wrong_question_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:background="@android:color/white"
+        android:alpha="0.70"
+        android:padding="8dp" />
+
+    <!-- 重新练习 -->
+    <Button
+        android:id="@+id/repractice_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="重新练习错题"
+        android:textSize="16sp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- 返回主界面按钮 -->
+    <Button
+        android:id="@+id/return_to_main_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="返回主界面"
+        android:textSize="16sp"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

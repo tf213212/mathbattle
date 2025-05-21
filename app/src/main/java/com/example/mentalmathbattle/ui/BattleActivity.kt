@@ -3,11 +3,9 @@ package com.example.mentalmathbattle.ui
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mentalmathbattle.R
 import com.example.mentalmathbattle.data.WebSocketManager
@@ -26,7 +24,7 @@ class BattleActivity : AppCompatActivity() {
     private lateinit var opponentStatusText: TextView
 
     private var battleTimer: CountDownTimer? = null
-    private var millisUntilFinished: Long = 30000 // 初始化为30秒
+    private var millisUntilFinished: Long = 30000
 
     private var userId: Int = -1
     private var correctAnswer: Int = 0
@@ -36,13 +34,17 @@ class BattleActivity : AppCompatActivity() {
     private var battleEnded = false
     private var opponentCorrectCount = 0
     private var opponentTotalQuestions = 0
-    private var questionCount = 10 // 假设总题目数为10
+    private var questionCount = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WebSocketManager.retainConnection()
         setContentView(R.layout.activity_battle)
-        userId = intent.getIntExtra("userId", -1)
+
+        // 从 SharedPreferences 获取数据
+        val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        userId = prefs.getInt("userId", -1)
+        questionCount = prefs.getInt("questionCount", 10)
 
         questionText = findViewById(R.id.question_text)
         answerInput = findViewById(R.id.answer_input)
@@ -59,6 +61,15 @@ class BattleActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             submitAnswer()
+        }
+        answerInput.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER)) {
+                submitAnswer()
+                true
+            } else {
+                false
+            }
         }
     }
 
@@ -87,6 +98,9 @@ class BattleActivity : AppCompatActivity() {
                 "startBattle" -> {
                     val difficulty = jsonMessage.optString("difficulty")
                     val questionCount = jsonMessage.optInt("questionCount")
+                    // 存入 SharedPreferences
+                    val prefs = getSharedPreferences("user_prefs", MODE_PRIVATE)
+                    prefs.edit().putInt("questionCount", questionCount).apply()
                     runOnUiThread {
                         setupBattleUI(difficulty, questionCount)
                     }
@@ -96,8 +110,9 @@ class BattleActivity : AppCompatActivity() {
                     val correctCount = jsonMessage.optInt("correctCount")
                     val totalQuestions = jsonMessage.optInt("totalQuestions")
                     val timeSpent = jsonMessage.optInt("timeSpent")
+                    val score = jsonMessage.optInt("score")
                     runOnUiThread {
-                        navigateToResultActivity(result, correctCount, totalQuestions, timeSpent)
+                        navigateToResultActivity(result, correctCount, totalQuestions, timeSpent, score)
                     }
                 }
                 "statusUpdate" -> {
@@ -105,6 +120,11 @@ class BattleActivity : AppCompatActivity() {
                     val opponentTotalQuestions = jsonMessage.optInt("totalQuestions")
                     runOnUiThread {
                         updateOpponentStatus(opponentCorrectCount, opponentTotalQuestions)
+                    }
+                }
+                "waitingForOpponent" -> { // 新增：处理 waitingForOpponent 消息
+                    runOnUiThread {
+                        showWaitingForOpponent()
                     }
                 }
             }
@@ -164,22 +184,16 @@ class BattleActivity : AppCompatActivity() {
     private fun showResult(isCorrect: Boolean, correctAnswer: Int) {
         if (battleEnded) return
 
-        if (isCorrect) {
-            correctCount++
-        }
+        if (isCorrect) correctCount++
         totalQuestions++
 
         val resultMessage = if (isCorrect) "正确！" else "错误！正确答案是: $correctAnswer"
         resultText.text = resultMessage
         resultText.visibility = TextView.VISIBLE
 
-        // 更新己方状态
         updateYourProgress(totalQuestions)
-
-        // 发送当前状态给对手
         sendStatusUpdate()
 
-        // 检查是否所有题目都已完成
         if (totalQuestions >= questionCount) {
             endBattle()
         }
@@ -188,20 +202,19 @@ class BattleActivity : AppCompatActivity() {
     private fun endBattle() {
         battleEnded = true
         battleTimer?.cancel()
-
-        // 将对战信息发送给后端进行胜负判断
-        sendBattleInfoToServer()
+        sendBattleCompletedToServer() //发送 battleCompleted 消息
     }
 
-    private fun sendBattleInfoToServer() {
-        val battleInfo = JSONObject().apply {
-            put("type", "endBattle")
+
+    private fun sendBattleCompletedToServer() { //发送 battleCompleted 消息，包含必要信息
+        val battleCompleted = JSONObject().apply {
+            put("type", "battleCompleted")
             put("userId", userId)
             put("correctCount", correctCount)
-            put("totalQuestions", totalQuestions)
+            put("totalQuestions", questionCount)
             put("timeSpent", 30 - (millisUntilFinished.toInt() / 1000))
         }
-        WebSocketManager.send(battleInfo.toString())
+        WebSocketManager.send(battleCompleted.toString())
     }
 
     private fun setupBattleUI(difficulty: String, questionCount: Int) {
@@ -209,30 +222,27 @@ class BattleActivity : AppCompatActivity() {
         this.questionCount = questionCount
     }
 
-    // 在 BattleActivity 中，确保在跳转到 ResultActivity 时传递 userId
-    private fun navigateToResultActivity(result: String, correctCount: Int, totalQuestions: Int, timeSpent: Int) {
+    private fun navigateToResultActivity(result: String, correctCount: Int, totalQuestions: Int, timeSpent: Int, score: Int) {
         val intent = Intent(this, ResultActivity::class.java).apply {
             putExtra("result", result)
             putExtra("correctCount", correctCount)
             putExtra("totalQuestions", totalQuestions)
             putExtra("timeSpent", timeSpent)
-            putExtra("userId", userId) // 传递 userId
+            putExtra("score", score) // 传递分数信息
         }
         startActivity(intent)
         finish()
     }
 
     private fun updateYourProgress(currentQuestionIndex: Int) {
-        if (currentQuestionIndex > questionCount) return // 防止进度超过题目总数
-
+        if (currentQuestionIndex > questionCount) return
         val progress = (currentQuestionIndex * 100 / questionCount).toFloat()
         yourProgressBar.progress = progress.toInt()
         yourStatusText.text = "进度: ${currentQuestionIndex}/$questionCount"
     }
 
     private fun updateOpponentStatus(opponentCorrectCount: Int, opponentTotalQuestions: Int) {
-        if (opponentTotalQuestions > questionCount) return // 防止进度超过题目总数
-
+        if (opponentTotalQuestions > questionCount) return
         val progress = (opponentTotalQuestions * 100 / questionCount).toFloat()
         opponentProgressBar.progress = progress.toInt()
         opponentStatusText.text = "进度: ${opponentTotalQuestions}/$questionCount"
@@ -245,6 +255,10 @@ class BattleActivity : AppCompatActivity() {
             put("totalQuestions", totalQuestions)
         }
         WebSocketManager.send(statusUpdate.toString())
+    }
+
+    private fun showWaitingForOpponent() { // 新增：显示等待对手完成的界面
+        Toast.makeText(this, "等待对手完成对战...", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

@@ -39,9 +39,10 @@ object WebSocketManager {
         }
 
         if (isUserClosed) {
-            println("WebSocket 连接已由用户关闭，不重新连接")
-            return
+            println("WebSocket 连接曾由用户关闭，重置标志以允许重新连接")
+            isUserClosed = false // 自动清除标志，允许重新连接
         }
+
 
         val request = Request.Builder().url(url).build()
         client.newWebSocket(request, object : WebSocketListener() {

@@ -1,17 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="@drawable/backmain">
 
+    <!-- 用户ID展示 -->
     <TextView
+        android:id="@+id/text_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="当前用户ID：123456"
+        android:textColor="#333333"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- 题目数量选择 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="训练营"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:orientation="vertical"
+        android:layout_marginBottom="24dp">
 
-    <!-- 训练营内容 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="题目数量"
+            android:textColor="#666666"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_question_count"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"/>
+    </LinearLayout>
+
+    <!-- 难度选择 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="难度等级"
+            android:textColor="#666666"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_difficulty"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"/>
+    </LinearLayout>
+
+    <!-- 操作按钮组 -->
+    <Button
+        android:id="@+id/button_start_practice"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="开始练习"
+        android:textAllCaps="false"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.MaterialComponents.Button"/>
+
+    <Button
+        android:id="@+id/button_back_main"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="返回主界面"
+        android:textAllCaps="false"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#6200EE"
+        android:textSize="16sp"
+        android:strokeColor="#6200EE"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
 </LinearLayout>

@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mentalmathbattle.R
-import com.example.mentalmathbattle.ui.ErrorBookActivity
 import com.example.mentalmathbattle.ui.LeaderboardActivity
 import com.example.mentalmathbattle.ui.MatchActivity
+import com.example.mentalmathbattle.ui.ErrorBookActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 

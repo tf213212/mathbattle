@@ -1,17 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- 用户信息 -->
     <TextView
+        android:id="@+id/user_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="个人中心"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:text="用户名："
+        android:textSize="18sp"
+        android:padding="8dp" />
 
-    <!-- 个人中心内容 -->
+    <!-- 错题本标题 -->
+    <TextView
+        android:id="@+id/wrong_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📘 错题本"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingTop="16dp"/>
+
+    <!-- 错题列表 -->
+    <ListView
+        android:id="@+id/wrong_question_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp"/>
+
+    <!-- 返回主界面按钮 -->
+    <Button
+        android:id="@+id/return_to_main_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="返回主界面"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="10dp" />
 </LinearLayout>
